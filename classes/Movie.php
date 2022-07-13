@@ -4,14 +4,14 @@ class Movie {
     public $title;
     public $releaseYear;
     public $rating;
-    public $duration;
+    public $director;
     public $genre;
 
-    function __construct($_title, $_releaseYear, $_rating, $_duration, $_genre) {
+    function __construct($_title, $_releaseYear, $_rating, $_director, $_genre) {
         $this->setTitle($_title);
         $this->setReleaseYear($_releaseYear);
         $this->setRating($_rating);
-        $this->setDuration($_duration);
+        $this->setDirector($_director);
         $this->setGenre($_genre);
     }
 
@@ -27,6 +27,10 @@ class Movie {
     
     // $releaseYear setter and getter
     public function setReleaseYear($_releaseYear) {
+        // Se non viene fornito un anno numerico, faccio un return
+        if(!is_numeric($_releaseYear)) {
+            return;
+        }
         $this->releaseYear = $_releaseYear;
         return $this;
     }
@@ -37,6 +41,10 @@ class Movie {
 
     // $rating setter and getter
     public function setRating($_rating) {
+        // Se non viene fornito un voto numerico, faccio un return
+        if(!is_numeric($_rating)) {
+            return;
+        }
         $this->rating = $_rating;
         return $this;
     }
@@ -45,14 +53,14 @@ class Movie {
         return $this->rating;
     }
 
-    // $duration setter and getter
-    public function setDuration($_duration) {
-        $this->duration = $_duration;
+    // $director setter and getter
+    public function setDirector($_director) {
+        $this->director = $_director;
         return $this;
     }
 
-    public function getDuration() {
-        return $this->duration;
+    public function getDirector() {
+        return $this->director;
     }
 
     // $genre setter and getter
@@ -64,6 +72,18 @@ class Movie {
     public function getGenre() {
         return $this->genre;
     }
+
+    // Funzione che stampa una card con i dati del film
+    public function printCard() {
+    ?>
+    <div>
+        <h2><?php echo $this->title ?> <bold><?php echo $this->rating ?> &starf;</bold></h2>
+        <h5>di <?php echo $this->director ?></h5>
+        <div><?php echo $this->releaseYear ?></div>
+        <div><?php echo $this->genre ?></div>
+    </div>
+    <?php
+  }
 }
 
 ?>
